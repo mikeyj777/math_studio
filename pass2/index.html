@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Math Tutorial</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="container" id="question-container">
+            <h1>Math Practice</h1>
+            <p id="question">What is 0 + 0?</p>
+            <input type="number" id="answer" placeholder="Your answer">
+            <button id="submit-answer">Submit</button>
+            <p id="feedback"></p>
+        </div>
+        <div class="container" id="score-container">
+            <canvas id="score-chart"></canvas>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="scripts/script.js"></script>
+</body>
+</html>

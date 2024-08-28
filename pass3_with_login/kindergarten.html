@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Math Tutorial</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="container" id="question-container">
+            <h1>Kindergarten Math Practice</h1>
+            <p id="question">What is 0 + 0?</p>
+            <input type="number" id="answer" placeholder="Your answer">
+            <button id="submit-answer">Submit</button>
+            <p id="feedback"></p>
+            <button id="return-to-login">Return to Login</button>
+        </div>
+        <div class="container" id="score-container">
+            <canvas id="score-chart"></canvas>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.getElementById('return-to-login').addEventListener('click', () => {
+            window.location.href = 'index.html'; 
+        });
+    </script>
+    <script src="scripts/kindergarten_math.js"></script>
+</body>
+</html>
