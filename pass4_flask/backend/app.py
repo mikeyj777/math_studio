@@ -1,7 +1,10 @@
 from flask import Flask, request, jsonify, g
+from flask_cors import CORS
 import sqlite3
 
 app = Flask(__name__)
+# CORS(app)
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 DATABASE = 'math_studio.db'
 
@@ -30,9 +33,11 @@ def init_db():
         ''')
         db.commit()
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['POST'])
 def login():
+    
     data = request.json
+    print(data)
     name = data['name']
     cursor = get_db().cursor()
     cursor.execute('SELECT * FROM users WHERE name = ?', (name,))

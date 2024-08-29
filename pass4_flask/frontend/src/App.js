@@ -8,9 +8,9 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" exact component={Login} />
-        <Route path="/kindergarten" component={Kindergarten} />
-        <Route path="/first-grade" component={FirstGrade} /> {/* Optional */}
+        <Route path="/" element={<Login />} />
+        <Route path="/kindergarten" element={<Kindergarten />} />
+        <Route path="/first-grade" element={<FirstGrade />} /> {/* Optional */}
       </Routes>
     </Router>
   );

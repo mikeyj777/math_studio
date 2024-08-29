@@ -9,12 +9,13 @@ function Kindergarten() {
   const [score, setScore] = useState(0);
   const [attempts, setAttempts] = useState(0);
   const chartRef = useRef(null);
-  const [chart, setChart] = useState(null);
+  const chartInstanceRef = useRef(null);  // Ref to store the chart instance
 
   useEffect(() => {
     generateQuestion();
+
     const ctx = chartRef.current.getContext('2d');
-    const newChart = new Chart(ctx, {
+    chartInstanceRef.current = new Chart(ctx, {
       type: 'line',
       data: {
         labels: [],
@@ -34,7 +35,11 @@ function Kindergarten() {
         }
       }
     });
-    setChart(newChart);
+
+    // Cleanup function to destroy the chart when the component unmounts
+    return () => {
+      chartInstanceRef.current.destroy();
+    };
   }, []);
 
   const generateQuestion = () => {
@@ -54,13 +59,14 @@ function Kindergarten() {
     }
     setAttempts(attempts + 1);
     updateChart();
+    generateQuestion();  // Automatically generate a new question after submitting
   };
 
   const updateChart = () => {
     const newScore = (score / attempts) * 100;
-    chart.data.labels.push(`Q${attempts}`);
-    chart.data.datasets[0].data.push(newScore);
-    chart.update();
+    chartInstanceRef.current.data.labels.push(`Q${attempts}`);
+    chartInstanceRef.current.data.datasets[0].data.push(newScore);
+    chartInstanceRef.current.update();
   };
 
   return (
@@ -75,7 +81,6 @@ function Kindergarten() {
       />
       <button onClick={handleSubmit}>Submit</button>
       <p>{feedback}</p>
-      <button onClick={generateQuestion}>Next Question</button>
       <button onClick={() => window.location.href = '/'}>Return to Login</button>
       <p>Score: {score} out of {attempts}</p>
       <canvas ref={chartRef} id="score-chart"></canvas>
